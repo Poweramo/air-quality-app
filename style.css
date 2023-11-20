@@ -1,0 +1,46 @@
+/* FIX: The body is not taking all the space + a little bar in the top of the document */
+/* TODO: Making a better style, changing heights */
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+}
+
+#title {
+	color: white;
+	text-shadow: black 3px 5px 3px;
+	margin: 10px;
+	text-align: center;
+}
+
+.app {
+	background: black;
+	height: 200px;
+	width: 250px;
+	margin: 0 auto;
+	margin-top: 25px;
+}
+
+table {
+	width: 200px;
+	height: 150px;
+	border-collapse: collapse;
+}
+
+table,
+tr,
+td {
+	border: white solid 1px;
+}
+
+td {
+	color: white;
+	width: 50%;
+}
