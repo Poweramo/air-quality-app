@@ -1,5 +1,4 @@
-/* FIX: The body is not taking all the space + a little bar in the top of the document */
-/* TODO: Making a better style, changing heights */
+/* TODO: Making a better style, changing heights (checking the style each time)*/
 
 * {
 	box-sizing: border-box;
@@ -11,36 +10,75 @@ body {
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
+	font-size: 18px;
 }
 
 #title {
 	color: white;
 	text-shadow: black 3px 5px 3px;
-	margin: 10px;
 	text-align: center;
 }
 
 .app {
-	background: black;
-	height: 200px;
-	width: 250px;
-	margin: 0 auto;
-	margin-top: 25px;
+	background: white;
+	height: 300px;
+	width: 500px;
+	margin: 15px auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-shadow: black 1px 1px 15px;
+	border-radius: 10px;
+}
+
+#city {
+	color: black;
 }
 
 table {
-	width: 200px;
+	width: 300px;
 	height: 150px;
 	border-collapse: collapse;
+	margin: 10px;
 }
 
 table,
 tr,
 td {
-	border: white solid 1px;
+	border: black solid 1px;
 }
 
 td {
-	color: white;
+	color: black;
 	width: 50%;
+	text-align: center;
+}
+
+.scale-bar {
+	height: 20px;
+	width: 200px;
+	border: 2px solid black;
+	display: flex;
+	flex-direction: row;
+	margin: 10px;
+}
+
+.levels {
+	height: 100%;
+}
+
+#level0,
+#level1,
+#level2,
+#level3 {
+	width: 10%;
+}
+
+#level4 {
+	width: 20%;
+}
+
+#level5 {
+	width: 40%;
 }
