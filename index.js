@@ -1,15 +1,15 @@
-// http://api.airvisual.com/v2/nearest_city?key=${key}
-// ! Changing document.etc to => const element = ...
-// TODO: Making the pointer fit the right color
+// * Important link : https://api.airvisual.com/v2/nearest_city?key=${key}
 // TODO: Making the code easy to understand as much as possible
 // ? Creating a json file for the data
 
 const key = "6a935a55-61aa-4ddb-8ce0-69cf52e9545a";
+const emojiElement = document.getElementById("emoji");
 const cityElement = document.getElementById("city");
-const cityNameElement = document.getElementById("city-name");
+const placeElement = document.getElementById("place");
 const airQualityIndexElement = document.getElementById("air-quality-index");
 const pollutionInfoElement = document.getElementById("pollution-info");
 const scaleBarLevelsElement = document.querySelectorAll(".levels");
+const pointerElement = document.getElementById("pointer");
 let city;
 let country;
 let airQualityIndex;
@@ -32,7 +32,9 @@ let pollutionInfoColors = {
 };
 let pollutionEmojis = ["😀", "🙁", "😨", "😷", "🤢", "💀"];
 
-fetch(`https://api.airvisual.com/v2/city?city=Lahore&state=Punjab&country=Pakistan&key=${key}`)
+fetch(
+	`https://api.airvisual.com/v2/nearest_city?lat=28.539768216025337&lon=77.31356967159752&key=${key}`,
+)
 	.then((res) => res.json())
 	.then((data) => {
 		country = data.data.country;
@@ -41,24 +43,23 @@ fetch(`https://api.airvisual.com/v2/city?city=Lahore&state=Punjab&country=Pakist
 	})
 	.then(() => {
 		cityElement.textContent = `Here is ${city} situation.`;
-		cityNameElement.textContent = `${city}, ${country}`;
+		placeElement.textContent = `${city}, ${country}`;
 		airQualityIndexElement.textContent = airQualityIndex;
-
 		for (let i = 0; i < pollutionInfoLevels.length; i++) {
 			if (airQualityIndex > 300) {
 				pollutionInfoElement.textContent = pollutionInfoLevels[5];
 				document.body.style.backgroundColor = pollutionInfoColors[`level${5}`];
-				document.getElementById("emoji").textContent = pollutionEmojis[5];
+				emojiElement.textContent = pollutionEmojis[5];
+				pointerElement.style.gridArea = `level${5} / level${5} / level${5} / level${5}`;
+				i = pollutionInfoLevels.length;
+			} else if (airQualityIndex <= USAQILevel) {
+				pollutionInfoElement.textContent = pollutionInfoLevels[i - 1];
+				document.body.style.backgroundColor = pollutionInfoColors[`level${i - 1}`];
+				emojiElement.textContent = pollutionEmojis[i - 1];
+				pointerElement.style.gridArea = `level${i} / level${i} / level${i} / level${i}`;
 				i = pollutionInfoLevels.length;
 			} else {
-				if (airQualityIndex <= USAQILevel) {
-					pollutionInfoElement.textContent = pollutionInfoLevels[i];
-					document.body.style.backgroundColor = pollutionInfoColors[`level${i}`];
-					document.getElementById("emoji").textContent = pollutionEmojis[i];
-					i = pollutionInfoLevels.length;
-				} else {
-					USAQILevel += 50;
-				}
+				USAQILevel += 50;
 			}
 		}
 	});
