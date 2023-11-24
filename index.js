@@ -1,8 +1,4 @@
-// * Important link : https://api.airvisual.com/v2/nearest_city?key=${key}
-// TODO: Making the code easy to understand as much as possible
-// ? Creating a json file for the data
-
-const key = "6a935a55-61aa-4ddb-8ce0-69cf52e9545a";
+const key = ""; // Put your key that you've got from the api
 const emojiElement = document.getElementById("emoji");
 const cityElement = document.getElementById("city");
 const placeElement = document.getElementById("place");
@@ -32,9 +28,7 @@ let pollutionInfoColors = {
 };
 let pollutionEmojis = ["😀", "🙁", "😨", "😷", "🤢", "💀"];
 
-fetch(
-	`https://api.airvisual.com/v2/nearest_city?lat=28.539768216025337&lon=77.31356967159752&key=${key}`,
-)
+fetch(`https://api.airvisual.com/v2/nearest_city?key=${key}`)
 	.then((res) => res.json())
 	.then((data) => {
 		country = data.data.country;
